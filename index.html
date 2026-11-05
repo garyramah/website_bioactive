@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BioActive.ai — From a Plant to a Proof</title>
+<meta name="description" content="BioActive.ai — the idea behind the name: an evidence-first home for bioactive compounds. The domain name is for sale on Atom.">
+<style>
+  :root{
+    --bg:#071410; --bg2:#0a1c13; --panel:#0c1f16; --line:#1d3a2c; --line2:#2a4d3a;
+    --ink:#eef5ef; --mut:#a8bfae; --dim:#6f8a78;
+    --leaf:#4ade80; --leaf2:#7ddba3; --leaf-dim:#166534;
+    --gold:#fbbf24; --gold2:#fde68a; --amber:#fbbf24; --red:#f87171;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--leaf2)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  /* header */
+  header{position:sticky;top:0;z-index:20;background:rgba(7,20,16,.9);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;gap:18px;height:58px}
+  .wordmark{font-weight:800;letter-spacing:.02em;font-size:19px;color:var(--ink);text-decoration:none}
+  .wordmark b{color:var(--leaf)}
+  .nav .links{display:flex;gap:18px;margin-left:24px;font-size:14px}
+  .nav .links a{color:var(--mut);text-decoration:none}
+  .nav .links a:hover{color:var(--ink)}
+  @media(max-width:760px){.nav .links{display:none}}
+  .nav .cta{margin-left:auto;display:inline-block;padding:9px 18px;border-radius:9px;font-weight:700;font-size:14px;
+    text-decoration:none;background:var(--gold);color:#422006}
+  .nav .cta:hover{background:var(--gold2)}
+  /* hero */
+  .hero{padding:84px 0 64px;position:relative;overflow:hidden;text-align:center;
+    background:
+      radial-gradient(900px 420px at 50% -10%, rgba(74,222,128,.14), transparent 60%),
+      radial-gradient(700px 380px at 50% 115%, rgba(251,191,36,.07), transparent 60%),
+      linear-gradient(180deg,#0a1c13,#071410)}
+  .hero .kicker{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--leaf);font-weight:700;margin:0 0 14px}
+  .hero .name{font-size:clamp(52px,10vw,96px);line-height:1;font-weight:800;letter-spacing:-.03em;margin:0}
+  .hero .name b{color:var(--leaf)}
+  .hero .name .tld{color:var(--gold)}
+  .hero h1{font-size:clamp(26px,4vw,40px);line-height:1.15;margin:22px 0 0;letter-spacing:-.01em}
+  .hero .chain{font-size:clamp(17px,2.6vw,22px);font-weight:700;color:var(--gold2);margin:18px 0 8px}
+  .hero .asp{font-size:13px;color:var(--dim);margin:0 0 18px}
+  .hero .sub{max-width:640px;margin:0 auto 30px;color:var(--mut);font-size:17px}
+  .btn{display:inline-block;padding:15px 34px;border-radius:11px;font-weight:800;font-size:17px;
+    text-decoration:none;background:var(--gold);color:#422006;transition:.15s}
+  .btn:hover{background:var(--gold2)}
+  .btn.ghost{background:transparent;border:1px solid var(--line2);color:var(--ink);font-weight:700}
+  .btn.ghost:hover{border-color:var(--leaf);color:var(--leaf2)}
+  .hero .btnrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .hero .frame{max-width:640px;margin:26px auto 0;font-size:13px;color:var(--dim);
+    border:1px dashed var(--line2);border-radius:10px;padding:12px 16px;text-align:left}
+  .hero .frame b{color:var(--mut)}
+  /* sections */
+  section{padding:64px 0;border-top:1px solid var(--line)}
+  .eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--leaf);font-weight:700;margin-bottom:10px}
+  h2{font-size:clamp(26px,3.4vw,34px);line-height:1.2;margin:0 0 14px;letter-spacing:-.01em}
+  .lede{color:var(--mut);max-width:760px;margin:0 0 26px}
+  .lede b{color:var(--ink)}
+  .field-label{display:inline-block;background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.4);
+    color:var(--amber);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:600;margin-bottom:18px;max-width:760px}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .step .n{font-size:12px;font-weight:800;letter-spacing:.16em;color:var(--amber);text-transform:uppercase}
+  .step h3{margin:8px 0 8px;font-size:19px}
+  .step p{margin:0;color:var(--mut);font-size:15px}
+  .step p b{color:var(--ink)}
+  .step p em{color:var(--leaf2)}
+  /* ladder */
+  .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+  .tab{flex:1;min-width:140px;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:14px;cursor:pointer;text-align:left;color:var(--mut);font-family:inherit}
+  .tab:hover{border-color:var(--line2)}
+  .tab[aria-selected="true"]{border-color:var(--leaf);background:#0e2a1c;color:var(--ink)}
+  .tab .lv{font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
+  .tab .nm{font-size:15px;font-weight:700;margin-top:2px}
+  .tab .sh{font-size:12px;color:var(--dim);margin-top:2px}
+  .ladder-card{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:14px;padding:24px}
+  .ladder-card h3{margin:0 0 4px;font-size:20px}
+  .ladder-card .std{color:var(--mut);font-size:15px;margin:0 0 18px}
+  .ladder-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.ladder-grid{grid-template-columns:1fr}}
+  .lg h4{margin:0 0 6px;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .lg.may h4{color:var(--leaf)}
+  .lg.maynot h4{color:var(--red)}
+  .lg.example h4{color:var(--amber)}
+  .lg p{margin:0;color:var(--mut);font-size:15px}
+  .lg.example{grid-column:1/-1}
+  .caption{margin-top:16px;font-size:14px;color:var(--mut)}
+  .caption b{color:var(--ink)}
+  /* papers */
+  .papers{display:grid;gap:16px}
+  .paper{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .paper p{margin:0;color:var(--mut);font-size:15px}
+  .paper p b{color:var(--ink)}
+  .paper .cite{font-size:13px;color:var(--dim);margin-top:10px}
+  .scope{margin-top:18px;border:1px dashed var(--line2);border-radius:12px;padding:16px 18px;font-size:14px;color:var(--mut)}
+  .scope b{color:var(--ink)}
+  /* areas */
+  .areas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:860px){.areas{grid-template-columns:1fr}}
+  .area{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .area h3{margin:0 0 8px;font-size:18px}
+  .area p{margin:0;color:var(--mut);font-size:15px}
+  .area p b{color:var(--ink)}
+  .notcovered{margin-top:18px;font-size:14px;color:var(--dim);font-style:italic}
+  /* mission */
+  .mv{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  @media(max-width:760px){.mv{grid-template-columns:1fr}}
+  .mv .box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .mv .box h3{margin:0 0 8px;font-size:18px;color:var(--gold2)}
+  .mv .box p{margin:0;color:var(--mut);font-size:15px}
+  .gov{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .gov h3{margin:0 0 12px;font-size:18px}
+  .gov ul{margin:0;padding-left:20px;color:var(--mut);font-size:15px}
+  .gov li{margin-bottom:8px}
+  .gov li b{color:var(--ink)}
+  .principles{margin-top:16px;font-size:14px;color:var(--dim);font-style:italic}
+  /* facts */
+  .facts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+  @media(max-width:760px){.facts{grid-template-columns:1fr}}
+  .fact{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .fact h3{margin:0 0 8px;font-size:18px}
+  .fact p{margin:0;color:var(--mut);font-size:15px}
+  .fact p b{color:var(--ink)}
+  .fact .big{font-size:26px;font-weight:800;color:var(--leaf2);letter-spacing:-.01em}
+  .fact .big .gold{color:var(--gold)}
+  /* market */
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:860px){.stats{grid-template-columns:1fr}}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px}
+  .stat .k{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);font-weight:700}
+  .stat .v{font-size:34px;font-weight:800;letter-spacing:-.02em;color:var(--leaf2);margin:8px 0 2px}
+  .stat .v small{font-size:18px;color:var(--mut);font-weight:700}
+  .stat .to{font-size:16px;color:var(--mut)}
+  .stat .to b{color:var(--gold2)}
+  .stat .src{font-size:12px;color:var(--dim);margin-top:12px}
+  /* who */
+  .who{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(max-width:760px){.who{grid-template-columns:1fr}}
+  .who .item{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px 22px;
+    font-size:16px;color:var(--mut)}
+  .who .item b{color:var(--ink)}
+  .who .item::before{content:"— ";color:var(--gold);font-weight:800}
+  .guardline{margin-top:18px;font-size:14px;color:var(--dim);font-style:italic}
+  /* offer */
+  .offer-wrap{max-width:640px;margin:0 auto;text-align:center}
+  .offer-wrap .tagline{font-size:clamp(22px,3.4vw,30px);font-weight:700;color:var(--gold2);margin:0 0 8px}
+  .offer-wrap .sub{color:var(--mut);margin:0 0 28px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:left;margin-bottom:24px}
+  .card table{width:100%;border-collapse:collapse;font-size:15px}
+  .card th,.card td{padding:14px 20px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  .card tr:last-child th,.card tr:last-child td{border-bottom:0}
+  .card th{color:var(--dim);font-weight:600;width:34%}
+  .card td{color:var(--ink)}
+  .card td .gold{color:var(--gold2);font-weight:700}
+  .offer-note{margin-top:16px;font-size:13px;color:var(--dim)}
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:34px 0 44px;color:var(--dim);font-size:14px}
+  footer p{max-width:760px}
+  footer b{color:var(--mut)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="wordmark" href="#top"><b>BioActive</b>.ai</a>
+    <div class="links">
+      <a href="#how">How it works</a>
+      <a href="#field">The field</a>
+      <a href="#market">The market</a>
+    </div>
+    <a class="cta" href="#offer">Make an offer</a>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="wrap">
+    <p class="kicker">Bioactive intelligence — an introduction</p>
+    <p class="name"><b>BioActive</b><span class="tld">.ai</span></p>
+    <h1>From a Plant to a Proof</h1>
+    <p class="chain">Discover &rarr; Validate &rarr; Formulate &rarr; Prove &rarr; Personalize &rarr; Scale.</p>
+    <p class="asp">The aim — an aspiration, not a description of anything that exists.</p>
+    <p class="sub">A page about how natural compounds are studied — what the published research actually shows, how a trial is graded, and why a prediction is not a proof.</p>
+    <div class="btnrow">
+      <a class="btn" href="https://www.atom.com/name/BioActive.ai">Make an offer on Atom</a>
+      <a class="btn ghost" href="#field">Read the field</a>
+    </div>
+    <div class="frame">
+      <b>What this page is:</b> the idea the name carries — a concept for an evidence-first bioactive ecosystem, not an operating company. No platform, product, data, briefing, partnership, or newsletter is offered here. The domain name itself is for sale; the offer is in the last section.
+    </div>
+  </div>
+</div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">What BioActive.ai is</div>
+    <h2>How bioactive discovery works</h2>
+    <p class="lede">How bioactive discovery works — the field&rsquo;s method, not BioActive&rsquo;s. Before anyone talks about a product, the field runs a sequence. It starts with observation, moves to mechanism, and only then to a trial — and a trial is graded on what it actually showed.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">Step 1</div>
+        <h3>Observe</h3>
+        <p>Diets rich in polyphenols — plant compounds found in fruits, vegetables, tea, and cocoa — are associated in cohort and case-control studies with lower risk of chronic disease. The review that summarises this work is careful about what it is: a narrative review of <em>hypothesized</em> protective effects, drawing mainly on animal models, feeding experiments, and human cohort and case-control studies (Cory et al., 2018).</p>
+      </div>
+      <div class="step">
+        <div class="n">Step 2</div>
+        <h3>Connect to mechanism</h3>
+        <p>The gut microbiota links what we eat to immune, metabolic, and neurobehavioural traits. Diet and fibre can shift the microbiota, and greater microbiome diversity and high-fibre intake are related to lower long-term weight gain. Targeting the microbiome with probiotics or dietary fibre benefits health and <em>could potentially</em> reduce obesity — &ldquo;could potentially&rdquo; is the authors&rsquo; own wording (Valdes et al., 2018).</p>
+      </div>
+      <div class="step">
+        <div class="n">Step 3</div>
+        <h3>Test at a fixed dose</h3>
+        <p>A randomized trial tests one compound, at one dose, in one population. A large randomized trial of a bioactive — COSMOS — gave 21,442 older adults 500 mg of cocoa flavanols a day (including 80 mg of epicatechin) or a placebo for a median of 3.6 years (Sesso et al., 2022).</p>
+      </div>
+      <div class="step">
+        <div class="n">Step 4</div>
+        <h3>Grade what it showed</h3>
+        <p>COSMOS did not significantly reduce total cardiovascular events — its primary endpoint (<b>HR 0.90, 95% CI 0.78–1.02</b>). Cardiovascular death, a secondary endpoint, was <b>27% lower</b> (HR 0.73, 95% CI 0.54–0.98). The authors&rsquo; own conclusion: additional research is warranted. A single trial, however large, is one rung — not the top of the ladder (Sesso et al., 2022).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ladder">
+  <div class="wrap">
+    <div class="eyebrow">Try it — grade the evidence</div>
+    <h2>Every claim sits somewhere on the ladder</h2>
+    <div class="field-label">A teaching tool. This ladder is the framework this page proposes for grading evidence. It is not a system that exists, and no ingredient on this page has been graded by it.</div>
+    <p class="lede">Every claim about a natural compound sits somewhere on this ladder. Click a level to see what evidence it requires, what may be said at that level, and what may not.</p>
+    <div class="tabs" role="tablist" aria-label="Evidence ladder levels">
+      <button class="tab" role="tab" id="tab-1" aria-selected="true" aria-controls="panel" data-level="1">
+        <div class="lv">Level 1</div><div class="nm">AI prediction only</div><div class="sh">A model&rsquo;s prediction, no lab work</div>
+      </button>
+      <button class="tab" role="tab" id="tab-2" aria-selected="false" aria-controls="panel" data-level="2">
+        <div class="lv">Level 2</div><div class="nm">Mechanistic / in vitro</div><div class="sh">Shown in a mechanism or cell model</div>
+      </button>
+      <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel" data-level="3">
+        <div class="lv">Level 3</div><div class="nm">Human feasibility</div><div class="sh">Small human study or biomarker change</div>
+      </button>
+      <button class="tab" role="tab" id="tab-4" aria-selected="false" aria-controls="panel" data-level="4">
+        <div class="lv">Level 4</div><div class="nm">Randomized trial</div><div class="sh">A randomized controlled trial</div>
+      </button>
+      <button class="tab" role="tab" id="tab-5" aria-selected="false" aria-controls="panel" data-level="5">
+        <div class="lv">Level 5</div><div class="nm">Replicated + reviewed</div><div class="sh">Replicated trials, regulatory review</div>
+      </button>
+    </div>
+    <div class="ladder-card" id="panel" role="tabpanel" aria-live="polite">
+      <h3 id="ladderTitle"></h3>
+      <p class="std" id="ladderStd"></p>
+      <div class="ladder-grid">
+        <div class="lg may"><h4>What may be said</h4><p id="ladderMay"></p></div>
+        <div class="lg maynot"><h4>What may not be said</h4><p id="ladderMayNot"></p></div>
+        <div class="lg example"><h4>Worked example</h4><p id="ladderExample"></p></div>
+      </div>
+    </div>
+    <p class="caption"><b>The ladder grades evidence, not products.</b> A compound that has never been tested sits at Level 1 no matter how promising the prediction. A single trial, however large, is one rung.</p>
+  </div>
+</section>
+
+<section id="field">
+  <div class="wrap">
+    <div class="eyebrow">The field</div>
+    <h2>Three published results anchor this page</h2>
+    <p class="lede">The field — independent field research, not BioActive work. None of them is a BioActive result, and none of them is a product benchmark. Each is cited in full.</p>
+    <div class="papers">
+      <div class="paper">
+        <p><b>One large trial of a bioactive — Sesso et al. (COSMOS), 2022.</b> A randomized, double-blind, placebo-controlled trial of a cocoa extract supplement — 500 mg of flavanols a day, including 80 mg of (&minus;)-epicatechin — against placebo in <b>21,442 older adults</b> (women aged 65 and over, men aged 60 and over), free of major cardiovascular disease and recently diagnosed cancer, followed for a median of 3.6 years. Total cardiovascular events, the primary outcome, were 10% lower with cocoa extract but the result did not reach statistical significance (410 events vs 456; HR 0.90, 95% CI 0.78–1.02; P = 0.11). Cardiovascular death, a secondary endpoint, was 27% lower (HR 0.73, 95% CI 0.54–0.98). The authors conclude: &ldquo;Cocoa extract supplementation did not significantly reduce total cardiovascular events among older adults but reduced CVD death by 27%&hellip; Additional research is warranted.&rdquo;</p>
+        <p class="cite">Sesso et al., &ldquo;Effect of cocoa flavanol supplementation for the prevention of cardiovascular disease events: the COcoa Supplement and Multivitamin Outcomes Study (COSMOS) randomized clinical trial,&rdquo; <i>The American Journal of Clinical Nutrition</i> 115(6), 1490–1500 (2022), DOI 10.1093/ajcn/nqac055. Trial registration NCT02422745.</p>
+      </div>
+      <div class="paper">
+        <p><b>What polyphenols are hypothesized to do — Cory et al., 2018.</b> A narrative mini-review of polyphenols — plant compounds — and their role in health outcomes and non-communicable diseases. The publications it draws on come mainly from animal models and feeding experiments, as well as human cohort and case-control studies. It evaluates <em>hypothesized</em> protective effects of polyphenols in obesity, neurodegenerative diseases, type 2 diabetes, and cardiovascular diseases. Hypothesized is the review&rsquo;s own word: this is a summary of what has been proposed and where the evidence stands, not a finding that polyphenols prevent disease.</p>
+        <p class="cite">Cory, Passarelli, Szeto, Tamez &amp; Mattei, &ldquo;The Role of Polyphenols in Human Health and Food Systems: A Mini-Review,&rdquo; <i>Frontiers in Nutrition</i> 5, 87 (2018), DOI 10.3389/fnut.2018.00087.</p>
+      </div>
+      <div class="paper">
+        <p><b>Diet, the microbiome, and health — Valdes et al., 2018.</b> A review of how the gut microbiota connects diet to health. Gut microbes are key to many aspects of human health, including immune, metabolic, and neurobehavioural traits. Gut microbiome diversity and high-fibre intake are related to lower long-term weight gain. The authors&rsquo; key message: &ldquo;Targeting the gut microbiome, with probiotics or dietary fibre, benefits human health and could potentially reduce obesity.&rdquo; <em>Could potentially</em> is their wording — an association and a plausible route, not a demonstrated outcome.</p>
+        <p class="cite">Valdes, Walter, Segal &amp; Spector, &ldquo;Role of the gut microbiota in nutrition and health,&rdquo; <i>BMJ</i> 361, k2179 (2018), DOI 10.1136/bmj.k2179.</p>
+      </div>
+    </div>
+    <div class="scope">
+      <b>What this section does not show:</b> no item above is a BioActive result, a product benchmark, or a claim any product could make. None of the three sources supports the wellness phrases &ldquo;supports gut-barrier integrity,&rdquo; &ldquo;supports healthy glucose metabolism,&rdquo; or &ldquo;supports skin barrier function&rdquo; — and none of those phrases appears anywhere else on this page. COSMOS tested one compound at one dose in one population; its primary endpoint missed significance, and the 27% figure is a secondary endpoint. Cory et al. is a review of hypothesized effects, largely from animal and observational work. Valdes et al. is a review of largely associational evidence.
+    </div>
+  </div>
+</section>
+
+<section id="where">
+  <div class="wrap">
+    <div class="eyebrow">Where bioactives are studied</div>
+    <h2>Three areas, from the cited work</h2>
+    <div class="areas">
+      <div class="area">
+        <h3>Cardiovascular health</h3>
+        <p>A cocoa flavanol extract tested in a large randomized trial — 21,442 older adults, 500 mg a day, median 3.6 years. The primary endpoint missed significance; cardiovascular death, a secondary endpoint, was 27% lower (Sesso et al., 2022).</p>
+      </div>
+      <div class="area">
+        <h3>Polyphenols and chronic disease</h3>
+        <p>Hypothesized protective effects of plant polyphenols evaluated across obesity, neurodegenerative diseases, type 2 diabetes, and cardiovascular diseases — on evidence drawn mainly from animal models, feeding experiments, and human cohort and case-control studies (Cory et al., 2018).</p>
+      </div>
+      <div class="area">
+        <h3>Gut microbiota and diet</h3>
+        <p>Diet and fibre modulate the gut microbiota; greater microbiome diversity and high-fibre intake are related to lower long-term weight gain, and targeting the microbiome with probiotics or dietary fibre could potentially benefit health (Valdes et al., 2018).</p>
+      </div>
+    </div>
+    <p class="notcovered">What is not covered here: skin, sleep, cognition, and immune/respiratory areas are not demonstrated by the work cited on this page, and they do not appear as studied areas above.</p>
+  </div>
+</section>
+
+<section id="mission">
+  <div class="wrap">
+    <div class="eyebrow">Mission · Vision · Governance</div>
+    <h2>What the idea holds itself to</h2>
+    <div class="mv">
+      <div class="box">
+        <h3>Mission</h3>
+        <p>Make the health potential of natural compounds discoverable, verifiable, and accessible.</p>
+      </div>
+      <div class="box">
+        <h3>Vision</h3>
+        <p>A field where the evidence for a natural compound is as visible as any product made from it.</p>
+      </div>
+    </div>
+    <div class="gov">
+      <h3>Governance — the principles this concept holds itself to</h3>
+      <ul>
+        <li><b>Scientific integrity:</b> Separate AI predictions from validated evidence; never present a prediction as proof.</li>
+        <li><b>Transparency:</b> Publish evidence summaries, limitations, and study methods.</li>
+        <li><b>Ethical sourcing:</b> Use traceable botanical supply chains, fair benefit-sharing, and respect for Indigenous knowledge.</li>
+        <li><b>Privacy:</b> Minimize consumer-data collection, anonymize outcome data, and give users control over sharing.</li>
+        <li><b>Safety first:</b> Monitor adverse events, interactions, contaminants, and vulnerable populations.</li>
+        <li><b>Regulatory alignment:</b> Adapt claims, product classification, and market entry by jurisdiction.</li>
+      </ul>
+    </div>
+    <p class="principles">These are principles, not claims about current work.</p>
+  </div>
+</section>
+
+<section id="why">
+  <div class="wrap">
+    <div class="eyebrow">Why this name</div>
+    <h2>The word the field already uses</h2>
+    <div class="facts">
+      <div class="fact">
+        <h3>A real word</h3>
+        <p><b>Bioactive</b> is a real English word. Merriam-Webster defines it as &ldquo;having an effect on a living organism.&rdquo; <b>First known use: 1938.</b></p>
+      </div>
+      <div class="fact">
+        <h3>The researchers&rsquo; word</h3>
+        <p>It is the word researchers use for the compounds themselves — the literature writes about <b>&ldquo;bioactive compounds&rdquo;</b> from plants and foods.</p>
+      </div>
+      <div class="fact">
+        <h3>Short and clean</h3>
+        <p class="big">9 <span class="gold">letters</span></p>
+        <p>No hyphen. No numbers. One word, on .ai.</p>
+      </div>
+      <div class="fact">
+        <h3>Held since 2023</h3>
+        <p><b>Registered since 2023.</b> Listed for sale on Atom.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="market">
+  <div class="wrap">
+    <div class="eyebrow">The market behind the word</div>
+    <h2>Three markets, one word</h2>
+    <p class="lede">The word names demand that is measured in the hundreds of billions — and still growing.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="k">Dietary supplements</div>
+        <div class="v">$209.5<small>B</small></div>
+        <div class="to">in 2025, projected to reach <b>$431.7B by 2033</b> — 9.5% compound annual growth</div>
+        <div class="src">Grand View Research, 2026–2033 report</div>
+      </div>
+      <div class="stat">
+        <div class="k">Nutraceuticals</div>
+        <div class="v">$270<small>B</small></div>
+        <div class="to">in 2024, projected to reach <b>$387.62B by 2030</b></div>
+        <div class="src">Virtue Market Research</div>
+      </div>
+      <div class="stat">
+        <div class="k">AI in healthcare</div>
+        <div class="v">$19.27<small>B</small></div>
+        <div class="to">in 2023, growing at <b>38.5% a year</b> from 2024 to 2030</div>
+        <div class="src">Grand View Research</div>
+      </div>
+    </div>
+    <div class="scope">
+      <b>Read the numbers honestly.</b> Published estimates for nutraceuticals vary widely by definition — other firms put the 2024 market higher, up to about $591 billion. The figure above is the conservative end of the range. And nutraceuticals overlaps with dietary supplements — these are different lenses on the same demand, not separate markets to add together.
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap">
+    <div class="eyebrow">Who it&rsquo;s for</div>
+    <h2>Four buyers, one word</h2>
+    <div class="who">
+      <div class="item"><b>A supplement brand</b> that wants the category word, not a coined one.</div>
+      <div class="item"><b>A functional food or beverage company</b> building around bioactive ingredients.</div>
+      <div class="item"><b>An AI health startup</b> working on bioactive discovery, formulation, or personalization.</div>
+      <div class="item"><b>A biotech or personal-care brand</b> that wants a name the science already uses.</div>
+    </div>
+    <p class="guardline">Fit is a suggestion, not a promise — the name carries no customers, no revenue, and no product.</p>
+  </div>
+</section>
+
+<section id="offer">
+  <div class="wrap">
+    <div class="offer-wrap">
+      <div class="eyebrow">The domain is for sale</div>
+      <h2>Own the name behind the idea</h2>
+      <p class="tagline">Own the word.</p>
+      <p class="sub">The idea above is a concept. The name that carries it — BioActive.ai — is for sale.</p>
+      <div class="card">
+        <table>
+          <tr><th>Name</th><td><b>BioActive.ai</b></td></tr>
+          <tr><th>The word</th><td>bioactive — &ldquo;having an effect on a living organism&rdquo; (Merriam-Webster; first known use 1938)</td></tr>
+          <tr><th>Length</th><td>9 letters, no hyphen, no numbers</td></tr>
+          <tr><th>Extension</th><td>.ai</td></tr>
+          <tr><th>Registered</th><td>Since 2023</td></tr>
+          <tr><th>Listed</th><td>For sale on Atom</td></tr>
+          <tr><th>Price</th><td><span class="gold">No price listed — make an offer</span></td></tr>
+        </table>
+      </div>
+      <a class="btn" href="https://www.atom.com/name/BioActive.ai">Make an offer on Atom</a>
+      <p class="offer-note">Listed for sale on Atom. Purchase is backed by Atom&rsquo;s Purchase Protection Guarantee.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><b>The ecosystem described on this page is a concept, not an operating company.</b> It carries no platform, product, data, briefing, partnership, or newsletter, and none is offered or implied.</p>
+    <p>This page offers the domain name <b>BioActive.ai</b> for sale. The buyer acquires the domain name only.</p>
+    <p>Market figures are third-party estimates, cited with their sources. They describe markets, not this domain&rsquo;s value, and no return or earnings are promised.</p>
+    <p>No trademark clearance is claimed. Buyers should conduct their own trademark search before use.</p>
+  </div>
+</footer>
+
+<script>
+/* Evidence Ladder explorer — a teaching tool built from the page's own stated ladder.
+   Content is the ladder as written on this page; no ingredient is graded by it. */
+(function () {
+  var levels = {
+    1: {
+      title: "Level 1 — AI prediction only",
+      std: "Standard: a model's prediction, with no laboratory work behind it.",
+      may: "Nothing to consumers; internal research only.",
+      maynot: "Any consumer-facing claim.",
+      example: "None on this page — a prediction with no lab work behind it sits here."
+    },
+    2: {
+      title: "Level 2 — Mechanistic or in vitro validation",
+      std: "Standard: the effect is shown in a mechanism or a cell model.",
+      may: "\u201CStudied in preclinical models.\u201D",
+      maynot: "Anything implying a human benefit.",
+      example: "The hypothesized polyphenol effects in Cory et al. (2018) — animal and cell work and cohort associations — sit here at best. They are hypotheses, not human evidence."
+    },
+    3: {
+      title: "Level 3 — Human feasibility or biomarker study",
+      std: "Standard: a small human study, or a change in a biomarker.",
+      may: "\u201CEarly clinical research suggests\u2026\u201D",
+      maynot: "A proven effect, or a dose recommendation.",
+      example: "None on this page."
+    },
+    4: {
+      title: "Level 4 — Randomized controlled trial",
+      std: "Standard: a randomized controlled trial.",
+      may: "\u201CClinically studied to support\u2026\u201D",
+      maynot: "A settled claim, a condition treated, or a benefit beyond what the trial measured.",
+      example: "COSMOS (Sesso et al., 2022) — one large randomized trial; its primary endpoint missed significance, and the 27% lower cardiovascular death is a secondary endpoint. One trial at Level 4 is not Level 5."
+    },
+    5: {
+      title: "Level 5 — Replicated trials and regulatory review",
+      std: "Standard: replicated trials and regulatory review.",
+      may: "Condition- or structure-function claims where permitted.",
+      maynot: "Anything beyond what regulators permit for the product and the market.",
+      example: "None on this page — no bioactive on this page has replicated trials and regulatory review behind it."
+    }
+  };
+
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var titleEl = document.getElementById('ladderTitle');
+  var stdEl = document.getElementById('ladderStd');
+  var mayEl = document.getElementById('ladderMay');
+  var mayNotEl = document.getElementById('ladderMayNot');
+  var exampleEl = document.getElementById('ladderExample');
+
+  function select(level) {
+    var data = levels[level];
+    if (!data) return;
+    titleEl.textContent = data.title;
+    stdEl.textContent = data.std;
+    mayEl.textContent = data.may;
+    mayNotEl.textContent = data.maynot;
+    exampleEl.textContent = data.example;
+    tabs.forEach(function (tab) {
+      tab.setAttribute('aria-selected', tab.getAttribute('data-level') === String(level) ? 'true' : 'false');
+    });
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      select(parseInt(tab.getAttribute('data-level'), 10));
+    });
+  });
+
+  select(1);
+})();
+</script>
+
+</body>
+</html>
